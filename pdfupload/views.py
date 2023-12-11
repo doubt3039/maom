@@ -1,5 +1,4 @@
 from django.shortcuts import render,HttpResponse,redirect
-from django.contrib import auth
 import pyrebase
 import firebase_admin
 from firebase_admin import credentials
@@ -88,7 +87,6 @@ def login(req):
 
         
 def logout(req):
-    auth.logout(req)
     base.current_user=None
     return redirect("home")
 
