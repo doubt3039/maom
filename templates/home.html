@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'home.css' %}">
+  <script src="{% static 'home.js'  %}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <title>MAOM WEBSITE</title>
+  
+</head>
+<body>
+  <nav>
+    <span>MAOM FILE UPLOAD</span>
+    <a href="{% url 'loginpage' %}" class="admin">admin</a>
+  </nav>
+  <div class="main_wrapper">
+    <div class="main_cont">
+      <div class="name_cont">
+        <input class="rollnumber" type="text" placeholder="enter rollnumber">
+      </div>
+      <div class="upload_cont">
+          <input  class="up" type="file" name="up" onchange="selectimg(event)">
+          <div class="upload" onclick="uploadimg()">
+            upload
+          </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

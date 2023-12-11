@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'admin.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="{%  static 'admin.js' %}"></script>
+    <title>Document</title>
+</head>
+<body>
+    {% csrf_token %}
+    <nav>
+        MAOM ADMIN PORTAL
+    </nav>
+    <div class="main">
+        {% for e in d %}
+            <div class="info_cont">
+                <div class="name">
+                    <span class="n_n">name</span>
+                    <span class="nam">{{ e.name }}</span>
+                </div>
+                <div class="uploadt">
+                    <span class="n_n">uploaded time</span>
+                    <span class="upd">{{ e.uploadtime }}</span>
+                </div>
+                <div class="pdfn">
+                    <span class="n_n">filename</span>
+                    <span class="pd">{{ e.pdf }}</span>
+                </div>
+                <div class="download">
+                    <a href="{% url 'download' name=e.pdf %}" class="linkbtn">
+                        <div class="download_btn">
+                            download
+                        </div>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+        <a href="{% url 'logout' %}" style="margin-top: 5vh;margin-bottom:5vh;">logout</a>
+
+    </div>
+
+</body>
+</html>
