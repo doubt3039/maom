@@ -73,12 +73,17 @@ WSGI_APPLICATION = 'pdf.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-       'NAME': BASE_DIR / 'db.sqlite3',
-    }
+DATABASES={
+   'default':{
+      'ENGINE':'django.db.backends.postgresql_psycopg2',
+      'NAME':'railway',
+      'USER':'postgres',
+      'PASSWORD':'5pjI8zIYEJ1XTzqZ6EKx',
+      'HOST':'containers-us-west-204.railway.app',
+      'PORT':'6152',
+   }
 }
+
 
 
 # Password validation
