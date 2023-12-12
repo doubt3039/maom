@@ -30,9 +30,9 @@
                     <span class="pd">{{ e.pdf }}</span>
                 </div>
                 <div class="download">
-                    <a href="{% url 'download' name=e.pdf %}" class="linkbtn">
+                    <a href="{{ e.url }}" class="linkbtn" target="_blank">
                         <div class="download_btn">
-                            download
+                            open
                         </div>
                     </a>
                 </div>

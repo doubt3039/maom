@@ -41,9 +41,9 @@ function ref(){
                     '<span class="pd">'+request.up[f].pdf+'</span>'+
                 '</div>'+
                 '<div class="download">'+
-                    '<a  href='+urlcreate(request.up[f].pdf)+' class="linkbtn">'+
+                    '<a  href='+request.up[f].url+' class="linkbtn" target="_blank">'+
                         '<div class="download_btn">'+
-                            'download'+
+                            'open'+
                         '</div>'+
                     '</a>'+
                 '</div>'+

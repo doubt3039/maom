@@ -48,6 +48,10 @@ base=pyrebase.initialize_app(config).auth()
 ref_1=db.reference('')
 
 def home(req):
+    firebase=pyrebase.initialize_app(config)
+    storage=firebase.storage()
+    url=storage.child("BTechCSEF1 (1).pdf").get_url("BTechCSEF1 (1).pdf")
+    print(url)
     return render(req,"home.html")
 
 def admin(req):
@@ -63,6 +67,9 @@ def admin(req):
                     j= today.get(t)
                     d["pdf"]=(str(j.get("pdfname")).split("<>"))[1]
                     d["uploadtime"]=j.get("uploadtime")
+                    firebase=pyrebase.initialize_app(config)
+                    storage=firebase.storage()
+                    d["url"]=storage.child((str(j.get("pdfname")).split("<>"))[1]).get_url((str(j.get("pdfname")).split("<>"))[1])
                     m.append(d)
                 return render(req,"admin.html",context={"d":m})
 
@@ -105,12 +112,7 @@ def download(req,name):
     firebase=pyrebase.initialize_app(config)
     storage=firebase.storage()
     url=storage.child(name).get_url(name)
-    y=name.split('.')
-    ext=y[len(y)-1]
-    kj=requests.get(url)
-    r=HttpResponse(kj.content,content_type="appilication/"+ext)
-    r['Content-Disposition'] = 'attachment; filename="'+name+'"'
-    return r
+    return url
 
 @csrf_exempt
 def refresh(req):
@@ -132,6 +134,9 @@ def refresh(req):
             j= today.get(t)
             d["pdf"]=(str(j.get("pdfname")).split("<>"))[1]
             d["uploadtime"]=j.get("uploadtime")
+            firebase=pyrebase.initialize_app(config)
+            storage=firebase.storage()
+            d["url"]=storage.child((str(j.get("pdfname")).split("<>"))[1]).get_url((str(j.get("pdfname")).split("<>"))[1])
             m.append(d)
     
     return HttpResponse(json.dumps({"up":m}), content_type="application/json")
