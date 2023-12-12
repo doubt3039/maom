@@ -76,13 +76,10 @@ def loginpage(req):
 def login(req):
     email=req.POST.get("username")
     passw=req.POST.get("password")
-    try:
-        user=base.sign_in_with_email_and_password(email,passw)
-        session_id=user['idToken']
-        req.session['uid']=str(session_id)
-        return redirect("admin")
-    except:
-        return render(req,"login.html",{"msg":"invalid credentials"})
+    user=base.sign_in_with_email_and_password(email,passw)
+
+    return redirect("admin")
+
 
 
         
