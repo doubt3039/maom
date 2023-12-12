@@ -48,10 +48,6 @@ base=pyrebase.initialize_app(config).auth()
 ref_1=db.reference('')
 
 def home(req):
-    firebase=pyrebase.initialize_app(config)
-    storage=firebase.storage()
-    url=storage.child("BTechCSEF1 (1).pdf").get_url("BTechCSEF1 (1).pdf")
-    print(url)
     return render(req,"home.html")
 
 def admin(req):
