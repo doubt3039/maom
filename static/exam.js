@@ -3,8 +3,16 @@ function notf(){
 
     Notification.requestPermission((result) => {
         console.log(result);
+        if (result=="granted"){
+            setInterval(yep,5000)
+
+        }
+
       });
-      const greeting = new Notification('Hi, How are you?');
-    }
+}
+
+function yep(){
+    const greeting = new Notification('Hi, How are you?');
+}
 
 
