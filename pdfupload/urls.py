@@ -11,5 +11,6 @@ urlpatterns = [
     path('admin',views.admin,name="admin"),
     path("logout",views.logout,name="logout"),
     path('refresh',views.refresh,name="refresh"),
-    path('loginpage',views.loginpage,name="loginpage")
+    path('loginpage',views.loginpage,name="loginpage"),
+    path('getid',views.getid,name="getid")
 ]

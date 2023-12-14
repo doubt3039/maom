@@ -2,6 +2,7 @@ function selectimg(event){
 
 }
 
+
 const firebaseConfig = {
     apiKey: "AIzaSyBZAyZvVciHmU0ocYPD2nZ0BW9IZePZptU",
     authDomain: "kidding-606b7.firebaseapp.com",

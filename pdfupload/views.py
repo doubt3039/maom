@@ -7,6 +7,8 @@ import datetime
 from django.views.decorators.csrf import csrf_exempt
 import json
 import requests
+from pytz import timezone 
+
 import firebase_admin
 
 
@@ -48,7 +50,7 @@ base=pyrebase.initialize_app(config).auth()
 ref_1=db.reference('')
 
 def home(req):
-    return render(req,"home.html")
+    return render(req,"exam.html")
 
 def admin(req):
         
@@ -91,16 +93,10 @@ def logout(req):
     return redirect("home")
 
 
-@csrf_exempt
 def uploadpdf(req):
-    pdf=req.FILES.get("file",None)
-    k=(req.FILES.get("file",None)).read()
-    name=req.POST["name"]
-    firebase=pyrebase.initialize_app(config)
-    storage=firebase.storage()
-    storage.child(str(pdf)).put(k)
-    ref_1.child(str(datetime.datetime.now().date())).update({str(name):{"uploadtime":str(datetime.datetime.now().date())+" ("+str(datetime.datetime.now().hour)+":"+str(datetime.datetime.now().minute)+")","pdfname":str(name)+"<>"+str(pdf)}})
-
+    name=req.POST.get("name",None)
+    pdf=req.POST.get("filename",None)
+    ref_1.child(str(datetime.datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d'))).update({str(name):{"uploadtime":str(datetime.datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')),"pdfname":str(name)+"<>"+str(pdf)}})
     return HttpResponse(json.dumps({"url":"yep"}), content_type="application/json")
 
 
@@ -136,3 +132,14 @@ def refresh(req):
             m.append(d)
     
     return HttpResponse(json.dumps({"up":m}), content_type="application/json")
+
+def getid(req):
+    k  ={"apiKey": "AIzaSyBZAyZvVciHmU0ocYPD2nZ0BW9IZePZptU",
+    "authDomain": "kidding-606b7.firebaseapp.com",
+    "databaseURL": "https://kidding-606b7-default-rtdb.firebaseio.com",
+    "projectId": "kidding-606b7",
+    "storageBucket": "kidding-606b7.appspot.com",
+    "messagingSenderId": "986582791827",
+    "appId": "1:986582791827:web:524af3abbaebac18d27f66",
+    "measurementId": "G-0WRH5NFR1L"}
+    return HttpResponse(json.dumps({"key":k}), content_type="application/json")
