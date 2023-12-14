@@ -6,7 +6,6 @@ from firebase_admin import db
 import datetime
 from django.views.decorators.csrf import csrf_exempt
 import json
-import requests
 from pytz import timezone 
 
 import firebase_admin
