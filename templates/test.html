@@ -18,21 +18,21 @@
     <div class="main">
         <div class="status_bar">
             <div class="circle">
-                <svg fill="#3a5a40" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M80-480v-80h120v80H80Zm136 222-56-58 84-84 58 56-86 86Zm28-382-84-84 56-58 86 86-58 56Zm476 480L530-350l-50 150-120-400 400 120-148 52 188 188-80 80ZM400-720v-120h80v120h-80Zm236 80-58-56 86-86 56 56-84 86Z"/></svg>
+                <svg fill="#0077b6" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M80-480v-80h120v80H80Zm136 222-56-58 84-84 58 56-86 86Zm28-382-84-84 56-58 86 86-58 56Zm476 480L530-350l-50 150-120-400 400 120-148 52 188 188-80 80ZM400-720v-120h80v120h-80Zm236 80-58-56 86-86 56 56-84 86Z"/></svg>
                 <span style="margin-top: 1px;">choose</span>
             </div>
             <div class="status">
                 <div class="progress"></div>
             </div>
             <div class="circle">
-                <svg fill="#3a5a40" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m438-240 226-226-58-58-169 169-84-84-57 57 142 142ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z"/></svg>
+                <svg fill="#0077b6" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m438-240 226-226-58-58-169 169-84-84-57 57 142 142ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z"/></svg>
                 <span style="margin-top: 1px;">select</span>
             </div>
             <div class="status">
                 <div class="progresss"></div>
             </div>
             <div class="circle">
-                <svg fill="#3a5a40" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M260-160q-91 0-155.5-63T40-377q0-78 47-139t123-78q25-92 100-149t170-57q117 0 198.5 81.5T760-520q69 8 114.5 59.5T920-340q0 75-52.5 127.5T740-160H260Zm0-80h480q42 0 71-29t29-71q0-42-29-71t-71-29h-60v-80q0-83-58.5-141.5T480-720q-83 0-141.5 58.5T280-520h-20q-58 0-99 41t-41 99q0 58 41 99t99 41Zm220-240Z"/></svg>
+                <svg fill="#0077b6" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M260-160q-91 0-155.5-63T40-377q0-78 47-139t123-78q25-92 100-149t170-57q117 0 198.5 81.5T760-520q69 8 114.5 59.5T920-340q0 75-52.5 127.5T740-160H260Zm0-80h480q42 0 71-29t29-71q0-42-29-71t-71-29h-60v-80q0-83-58.5-141.5T480-720q-83 0-141.5 58.5T280-520h-20q-58 0-99 41t-41 99q0 58 41 99t99 41Zm220-240Z"/></svg>
                 <span style="margin-top: 1px;">upload</span>
             </div>
         </div>
@@ -45,24 +45,34 @@
             {% csrf_token %}
             <div class="file_cont">
                 <div class="inpup">
+
                     <div class="name_up">
                         <svg fill="#E6756D" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Z"/></svg>
                         <input class="names" type="text" placeholder="Enter your name or groupname...">
                     </div>
                     <div class="upload_cont">
                         <div class="upload_btn" onclick="ok()">
-                            <svg style="margin-right: 5px;" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M440-160H260q-91 0-155.5-63T40-377q0-78 47-139t123-78q25-92 100-149t170-57q117 0 198.5 81.5T760-520q69 8 114.5 59.5T920-340q0 75-52.5 127.5T740-160H520v-286l64 62 56-56-160-160-160 160 56 56 64-62v286Z"/></svg>
-                            upload
+                            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                            <svg class="uploadsvg" style="margin-right: 5px;" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M440-160H260q-91 0-155.5-63T40-377q0-78 47-139t123-78q25-92 100-149t170-57q117 0 198.5 81.5T760-520q69 8 114.5 59.5T920-340q0 75-52.5 127.5T740-160H520v-286l64 62 56-56-160-160-160 160 56 56 64-62v286Z"/></svg>
+                            <span class="upstxts">upload</span>
                         </div>
                     </div>
                 </div>
+
+
                 <div class="fileupload_cont">
+                    <div class="backhome" onclick="location.reload()">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/></svg>
+                        back
+                    </div>
                     <div class="uploadwrapper">
-                        <div class="svgg">
-                            <svg fill="#0077b6" xmlns="http://www.w3.org/2000/svg" height="32" viewBox="0 -960 960 960" width="32"><path d="m160-800 80 160h120l-80-160h80l80 160h120l-80-160h80l80 160h120l-80-160h120q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800Zm0 240v320h640v-320H160Zm0 0v320-320Z"/></svg>
-                        </div>  
-                        <div class="typess"> 
-                            <span class="typetxt">type : video</span>
+                        <div class="sub_file">
+                            <div class="svgg">
+                                <svg fill="#0077b6" xmlns="http://www.w3.org/2000/svg" height="32" viewBox="0 -960 960 960" width="32"><path d="m160-800 80 160h120l-80-160h80l80 160h120l-80-160h80l80 160h120l-80-160h120q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800Zm0 240v320h640v-320H160Zm0 0v320-320Z"/></svg>
+                            </div>  
+                            <div class="typess"> 
+                                <span class="typetxt">type : file</span>
+                            </div>
                         </div>
                         <div class="choosecont">
                             <div class="choose" onclick="uploads()">
@@ -86,6 +96,32 @@
 
 
             <div class="uploadtxt"><svg style="margin-right: 5px;margin-left:10px" fill="#E6756D" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M280-160 120-320l160-160 57 56-64 64h167v80H273l63 64-56 56Zm280-120q-17 0-28.5-11.5T520-320q0-17 11.5-28.5T560-360q17 0 28.5 11.5T600-320q0 17-11.5 28.5T560-280Zm160 0q-17 0-28.5-11.5T680-320q0-17 11.5-28.5T720-360q17 0 28.5 11.5T760-320q0 17-11.5 28.5T720-280Zm-40-200-57-56 64-64H520v-80h167l-63-64 56-56 160 160-160 160ZM240-600q-17 0-28.5-11.5T200-640q0-17 11.5-28.5T240-680q17 0 28.5 11.5T280-640q0 17-11.5 28.5T240-600Zm160 0q-17 0-28.5-11.5T360-640q0-17 11.5-28.5T400-680q17 0 28.5 11.5T440-640q0 17-11.5 28.5T400-600Z"/></svg>active submissions</div>
+
+            <div class="active_sub_cont_mob">
+                <div class="subs_cont">
+                    <div class="sub_name_mo">
+                        <span class="sh">
+                            submission name
+                        </span>
+                        <span class="mob_project">maom group project</span>
+                    </div>
+                    <div class="sub_time_mo">
+                        <span class="sh">
+                            expires on
+                        </span>
+                       <span class="mob_time">9 am</span>
+                    </div>
+                </div>
+                <div class="mob_open">
+                    <div class="open_mob" onclick="filenav()">
+                        open
+                        <svg style="position: absolute;right:15px" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+                    </div>
+                </div>
+            </div>
+
+
+
             <div class="active_sub_cont">
                 <div class="sub_name">
                     <span class="sh">
@@ -102,7 +138,7 @@
                 <div class="sub_open">
                     <div class="open" onclick="filenav()">
                         open
-                        <svg style="position: absolute;right:15px" fill="#000000" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+                        <svg style="position: absolute;right:15px" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
                     </div>
                 </div>
             </div>

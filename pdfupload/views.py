@@ -7,7 +7,6 @@ import datetime
 from django.views.decorators.csrf import csrf_exempt
 import json
 from pytz import timezone 
-
 import firebase_admin
 
 
@@ -49,7 +48,7 @@ base=pyrebase.initialize_app(config).auth()
 ref_1=db.reference('')
 
 def home(req):
-    return render(req,"exam.html")
+    return render(req,"test.html")
 
 def admin(req):
         
@@ -57,18 +56,20 @@ def admin(req):
                 m=[]
                 k=ref_1.get(str(datetime.datetime.now().date()))[0]
                 today=k.get(str(datetime.datetime.now().date()))
-                print(today)
-                for t in today:
-                    d=dict()
-                    d["name"]=t
-                    j= today.get(t)
-                    d["pdf"]=(str(j.get("pdfname")).split("<>"))[1]
-                    d["uploadtime"]=j.get("uploadtime")
-                    firebase=pyrebase.initialize_app(config)
-                    storage=firebase.storage()
-                    d["url"]=storage.child((str(j.get("pdfname")).split("<>"))[1]).get_url((str(j.get("pdfname")).split("<>"))[1])
-                    m.append(d)
-                return render(req,"admin.html",context={"d":m})
+                if len(today)==0:
+                    for t in today:
+                        d=dict()
+                        d["name"]=t
+                        j= today.get(t)
+                        d["pdf"]=(str(j.get("pdfname")).split("<>"))[1]
+                        d["uploadtime"]=j.get("uploadtime")
+                        firebase=pyrebase.initialize_app(config)
+                        storage=firebase.storage()
+                        d["url"]=storage.child((str(j.get("pdfname")).split("<>"))[1]).get_url((str(j.get("pdfname")).split("<>"))[1])
+                        m.append(d)
+                    return render(req,"admin.html",context={"d":m})
+                else:
+                    return render(req,"admin.html",)
 
         else:
             print("tried but error")
@@ -93,10 +94,15 @@ def logout(req):
 
 
 def uploadpdf(req):
-    name=req.POST.get("name",None)
-    pdf=req.POST.get("filename",None)
-    ref_1.child(str(datetime.datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d'))).update({str(name):{"uploadtime":str(datetime.datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')),"pdfname":str(name)+"<>"+str(pdf)}})
-    return HttpResponse(json.dumps({"url":"yep"}), content_type="application/json")
+    try:
+        name=req.POST.get("name",None)
+        pdf=req.POST.get("filename",None)
+        ref_1.child(str(datetime.datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d'))).update({str(name):{"uploadtime":str(datetime.datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')),"pdfname":str(name)+"<>"+str(pdf)}})
+        return HttpResponse(json.dumps({"url":"yep"}), content_type="application/json")
+
+    except:
+        return HttpResponse(json.dumps({"url":"error"}), content_type="application/json")
+
 
 
 def download(req,name):
