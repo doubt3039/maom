@@ -55,8 +55,8 @@ def home(req):
 def admin(req):
         if base.current_user:
                 m=[]
-                k=ref_1.get(str(datetime.datetime.now().date()))[0]
-                today=k.get(str(datetime.datetime.now().date()))
+                k=ref_1.get("project2")[0]
+                today=k.get("project2")
                 if len(today)!=0:
                     for t in today:
                         d=dict()
@@ -106,7 +106,7 @@ def uploadpdf(req):
         name=req.POST.get("name",None)
         pdf=req.POST.get("filename",None)
         pdf1=req.POST.get('filename1',None)
-        ref_1.child(str(datetime.datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d'))).update({str(name):{"uploadtime":str(datetime.datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')),"pdfname":str(name)+"<>"+str(pdf1),"videoname":str(name)+"<>"+str(pdf)}})
+        ref_1.child("project2").update({str(name):{"uploadtime":str(datetime.datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')),"pdfname":str(name)+"<>"+str(pdf1),"videoname":str(name)+"<>"+str(pdf)}})
         return HttpResponse(json.dumps({"url":"yep"}), content_type="application/json")
 
     except:
@@ -125,8 +125,8 @@ def refresh(req):
     d=dict()
     m=[]
     l=req.POST["present"]
-    k=ref_1.get(str(datetime.datetime.now().date()))[0]
-    today=k.get(str(datetime.datetime.now().date()))
+    k=ref_1.get("project2")[0]
+    today=k.get("project2")
     up=[t  for t in today]
     inter=[]
     for i in up:
@@ -139,10 +139,12 @@ def refresh(req):
             d["name"]=t
             j= today.get(t)
             d["pdf"]=(str(j.get("pdfname")).split("<>"))[1]
+            d["video"]=(str(j.get("videoname")).split("<>"))[1]
             d["uploadtime"]=j.get("uploadtime")
             firebase=pyrebase.initialize_app(config)
             storage=firebase.storage()
             d["url"]=storage.child((str(j.get("pdfname")).split("<>"))[1]).get_url((str(j.get("pdfname")).split("<>"))[1])
+            d["vurl"]=storage.child((str(j.get("videoname")).split("<>"))[1]).get_url((str(j.get("videoname")).split("<>"))[1])
             m.append(d)
     
     return HttpResponse(json.dumps({"up":m}), content_type="application/json")

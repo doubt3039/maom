@@ -14,13 +14,11 @@ function urlcreate(k){
 
 
 function ref(){
-    console.log("hii");
     var l = [];
     var g=document.getElementsByClassName("nam");
     for(var i=0;i<g.length;i++){
         l.push(g[i].innerHTML.toString())
     }
-    console.log(l.join(','))
     $.ajax({
         type: "POST",
         url: "/refresh",
@@ -43,7 +41,7 @@ function ref(){
                     '<span class="pd">'+request.up[f].pdf+'</span>'+
                 '</div>'+
                 '<div class="download">'+
-                    '<a  href='+request.up[f].url+' class="linkbtn" target="_blank">'+
+                    '<a class="linkbtn" onclick="window.open('+request.up[f].url+',"_blank").focus();window.open('+request.up[f].vurl+',"_blank").focus()">'+
                         '<div class="download_btn">'+
                             'open'+
                         '</div>'+
