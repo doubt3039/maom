@@ -6,14 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'admin.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="{%  static 'admin.js' %}"></script>
+    <script src="{% static 'admin.js' %}"></script>
     <title>Document</title>
 </head>
 <body>
     {% csrf_token %}
     <nav>
         MAOM ADMIN PORTAL
+        <div class="create">
+            <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M440-280h80v-160h160v-80H520v-160h-80v160H280v80h160v160Zm40 200q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
+            <span style="margin-left: 5px;">create</span>
+        </div>
     </nav>
+
+ <!--   <div class="create_main">
+        <div class="create_btn" onclick="createsub()">
+            <span>create</span>
+        </div>
+        <div class="ass_name">
+            <span>assignment name</span>
+            <input type="text" class="assign_name" placeholder="enter assignment name">
+        </div>
+        <div class="time_cont">
+            <div class="ass_date">
+                    <span style="margin-right: 10px;">expire date</span>
+                    <input type="date" class="dates">
+            </div>
+            <div class="ass_time">
+                <span style="margin-right: 10px;">expire time</span>
+                <input type="time" class="times">
+            </div>
+        </div>
+        <div class="type_cont">
+            <div class="nopeople">
+                <span style="margin-right: 10px;">no of students per group</span>
+                <input type="number" class="count">
+            </div>
+            <div class="ass_nopdf">
+                <span style="margin-right: 10px;">no of pdfs to submit</span>
+                <input type="number" class="count_pdf">
+            </div> 
+        </div>
+
+        <div class="ass_type">
+
+        </div>
+    </div>
+-->
     <div class="main">
         {% for e in d %}
             <div class="info_cont">
@@ -30,11 +69,12 @@
                     <span class="pd">{{ e.pdf }}</span>
                 </div>
                 <div class="download">
-                    <a href="{{ e.url }}" class="linkbtn" target="_blank">
+                    <a  class="linkbtn" target="_blank" onclick="window.open('{{ e.vurl }}','_blank').focus();window.open('{{ e.url }}','_blank').focus()">
                         <div class="download_btn">
                             open
                         </div>
                     </a>
+                    <a style="display: none;" href="{{ e.vurl }}" class="vu" target="_blank">d</a>
                 </div>
             </div>
         {% endfor %}

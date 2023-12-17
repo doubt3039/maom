@@ -11,6 +11,8 @@ function urlcreate(k){
     return l
 }
 
+
+
 function ref(){
     console.log("hii");
     var l = [];
@@ -54,3 +56,23 @@ function ref(){
     });
 }
 
+
+
+
+function createsub(){
+    var name=document.getElementsByClassName("assign_name")[0].value;
+    var date=document.getElementsByClassName("dates")[0].value;
+    var time=document.getElementsByClassName("times")[0].value;
+    var count=document.getElementsByClassName("count")[0].value;
+    var pdf=document.getElementsByClassName("count_pdf")[0].value;
+    $.ajax({
+        type: "GET",
+        url: "/create",
+        mimeType:'application/json',
+        data:{'csrfmiddlewaretoken': $("input[name=csrfmiddlewaretoken]").val(),"name":name,"date":date,"time":time,"count":count,"pdf":pdf},
+        success: function (request) {
+            alert("oj");
+        }
+
+    })
+}

@@ -440,6 +440,10 @@ body{
         height: 100%;
         width: 0%;
     }
+
+    .main_cont{
+        margin-top: 40px;
+    }
 }
 
 @media screen and (max-width:906px) {

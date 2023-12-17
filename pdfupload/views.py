@@ -47,25 +47,28 @@ firebase_admin.initialize_app(cred, {
 base=pyrebase.initialize_app(config).auth()
 ref_1=db.reference('')
 
+
 def home(req):
     return render(req,"test.html")
 
+
 def admin(req):
-        
         if base.current_user:
                 m=[]
                 k=ref_1.get(str(datetime.datetime.now().date()))[0]
                 today=k.get(str(datetime.datetime.now().date()))
-                if len(today)==0:
+                if len(today)!=0:
                     for t in today:
                         d=dict()
                         d["name"]=t
                         j= today.get(t)
                         d["pdf"]=(str(j.get("pdfname")).split("<>"))[1]
+                        d["video"]=(str(j.get("videoname")).split("<>"))[1]
                         d["uploadtime"]=j.get("uploadtime")
                         firebase=pyrebase.initialize_app(config)
                         storage=firebase.storage()
                         d["url"]=storage.child((str(j.get("pdfname")).split("<>"))[1]).get_url((str(j.get("pdfname")).split("<>"))[1])
+                        d["vurl"]=storage.child((str(j.get("videoname")).split("<>"))[1]).get_url((str(j.get("videoname")).split("<>"))[1])
                         m.append(d)
                     return render(req,"admin.html",context={"d":m})
                 else:
@@ -78,12 +81,17 @@ def admin(req):
 def loginpage(req):
      return render(req,"login.html")
 
+
+
+
 def login(req):
     email=req.POST.get("username")
     passw=req.POST.get("password")
-    user=base.sign_in_with_email_and_password(email,passw)
-
-    return redirect("admin")
+    try:
+        user=base.sign_in_with_email_and_password(email,passw)
+        return redirect("admin")
+    except:
+        return redirect(req,"login.html")
 
 
 
@@ -97,7 +105,8 @@ def uploadpdf(req):
     try:
         name=req.POST.get("name",None)
         pdf=req.POST.get("filename",None)
-        ref_1.child(str(datetime.datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d'))).update({str(name):{"uploadtime":str(datetime.datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')),"pdfname":str(name)+"<>"+str(pdf)}})
+        pdf1=req.POST.get('filename1',None)
+        ref_1.child(str(datetime.datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d'))).update({str(name):{"uploadtime":str(datetime.datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')),"pdfname":str(name)+"<>"+str(pdf1),"videoname":str(name)+"<>"+str(pdf)}})
         return HttpResponse(json.dumps({"url":"yep"}), content_type="application/json")
 
     except:
@@ -138,6 +147,9 @@ def refresh(req):
     
     return HttpResponse(json.dumps({"up":m}), content_type="application/json")
 
+
+
+
 def getid(req):
     k  ={"apiKey": "AIzaSyBZAyZvVciHmU0ocYPD2nZ0BW9IZePZptU",
     "authDomain": "kidding-606b7.firebaseapp.com",
@@ -148,3 +160,10 @@ def getid(req):
     "appId": "1:986582791827:web:524af3abbaebac18d27f66",
     "measurementId": "G-0WRH5NFR1L"}
     return HttpResponse(json.dumps({"key":k}), content_type="application/json")
+
+
+def create(req):
+    name=req.get("name")
+    print(name)
+    #r ef_1.child("assignments").update({"":{"uploadtime":str(datetime.datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')),"pdfname":str(name)+"<>"+str(pdf)}})
+    return HttpResponse(json.dumps({"key":"yeah"}), content_type="application/json")

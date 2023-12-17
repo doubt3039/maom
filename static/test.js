@@ -16,11 +16,18 @@ function uploads(){
     document.getElementsByClassName("file")[0].click();
 }
 
-function selected(o){
-    var f=document.getElementsByClassName("file")[0];
-    document.getElementsByClassName("typetxt")[0].innerHTML+=" | "+(o.files[0]).name
+function uploads1(){
+    document.getElementsByClassName("file")[1].click();
 }
 
+function selected(o){
+
+    document.getElementsByClassName("typetxt")[0].innerHTML=(o.files[0]).name
+}
+
+function selected1(o){
+    document.getElementsByClassName("typetxt")[1].innerHTML=(o.files[0]).name
+}
 
 function complete(){
     var name=document.getElementsByClassName("names")[0].value;
@@ -37,7 +44,7 @@ function complete(){
         headers: {
             'X-CSRFToken': cs
             },
-        data:{"name":name,"filename":fake_path.split("\\").pop()},
+        data:{"name":name,"filename":fake_path.split("\\").pop(),"filename1":fake_path1.split("\\").pop()},
         success: function (request) {
             if (request.url =="error")
             {
@@ -55,10 +62,13 @@ function complete(){
 function ok(){
     var inp=document.getElementsByClassName("file")[0];
     let pile=inp.files;
+    var inp2=document.getElementsByClassName("file")[1];
+    let pile1=inp2.files;
     fake_path=document.getElementsByClassName('file')[0].value;
+    fake_path1=document.getElementsByClassName('file')[1].value;
     var name=document.getElementsByClassName("names")[0].value;
 
-    if ((pile[0] ) && (name != ""))
+    if ((pile[0] ) && (pile1[0]) && (name != ""))
     {
 
         document.getElementsByClassName('upstxts')[0].innerHTML="uploading";
@@ -87,7 +97,25 @@ function ok(){
                     }
                     if(percentval==100)
                     {
-                        complete();
+                        const storages = firebase.storage().ref(fake_path1.split("\\").pop());
+                        let p=storages.put(pile1[0]);
+                        p.on("status_changed",(snapshot)=>{
+                            var percentval = Math.floor((snapshot.bytesTransferred/snapshot.totalBytes)*100);
+                            console.log(percentval);
+                            if(screen.width<=980)
+                            {
+                                document.getElementsByClassName("progresss")[0].style.width=percentval.toString()+"%";
+                            }
+                            else{
+                                document.getElementsByClassName("progresss")[0].style.height=percentval.toString()+"%";
+                            }
+                            if(percentval==100)
+                            {
+                                complete(); 
+                            }
+                        },(error)=>{
+                                console.log("Error is ", error);
+                        })
                     }
                 },(error)=>{
                         console.log("Error is ", error);
