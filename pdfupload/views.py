@@ -55,7 +55,7 @@ def home(req):
           ip = x_forwarded_for.split(',')[0]
      else:
           ip = req.META.get('REMOTE_ADDR')
-     num = random.random()
+     
      g = geocoder.ip('me')
      a=g.latlng
      s=str(a[0])+str(a[1])
