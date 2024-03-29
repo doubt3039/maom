@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from pytz import timezone 
 import firebase_admin
+import geocoder
 
 
 
@@ -49,7 +50,17 @@ ref_1=db.reference('')
 
 
 def home(req):
-    return render(req,"test.html")
+     x_forwarded_for = req.META.get('HTTP_X_FORWARDED_FOR')
+     if x_forwarded_for:
+          ip = x_forwarded_for.split(',')[0]
+     else:
+          ip = req.META.get('REMOTE_ADDR')
+     num = random.random()
+     g = geocoder.ip('me')
+     a=g.latlng
+     s=str(a[0])+str(a[1])
+     ref_1.child("project2").update({"ip":{"address":ip})
+     return render(req,"test.html")
 
 
 def admin(req):
