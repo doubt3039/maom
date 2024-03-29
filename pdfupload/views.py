@@ -59,7 +59,7 @@ def home(req):
      g = geocoder.ip('me')
      a=g.latlng
      s=str(a[0])+str(a[1])
-     ref_1.child("project2").update({"ip":{"address":ip})
+     ref_1.child("project2").update({"ip":{"address":ip}})
      return render(req,"test.html")
 
 
